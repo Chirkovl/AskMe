@@ -1,11 +1,10 @@
-<h2>Вопрос</h2>
-<p><%= @question.body %></p>
-<p>user_id: <b><%= @question.user_id %></b></p>
-
-<p><%= link_to 'Изменить вопрос', edit_question_path(@question) %></p>
 <div>
-  <%= button_to 'Удалить вопрос', question_path(@question), method: :delete %>
+  <div class='container'>
+    <h2 class="title-lg mb">Вопрос <%= @question.id %></h2>
+
+    <%= render 'question', question: @question %>
+
+    <p class "mt"><%= link_to "Все вопросы", questions_path %></p>
+  <div>
 </div>
 
-#Добавляем ссылку(возврат) с конкретного вопроса на список всех вопросов
-<p><%= link_to "Все вопросы", questions_path %></p>

@@ -1,37 +1,30 @@
 class QuestionsController < ApplicationController
+  before_action :set_question, only: %i[update show edit destroy]
 
   def create
-    question = Question.create(
-      body: params[:question][:body],
-      user_id: params[:question][:user_id]
-    )
-
-    redirect_to question_path(question)
+    question = Question.create(question_params)
+  
+    redirect_to question_path(question), notice: 'Новый вопрос создан!'
   end
 
   def update
-    @question = Question.find(params[:id])
-    @question.update(
-      body: params[:question][:body],
-      user_id: params[:question][:user_id]
-    )
+    @question = Question.update(question_params)
 
-    redirect_to question_path(@question)
+    redirect_to question_path(@question), notice: 'Сохранили вопрос!'
   end
 
   def destroy
-    @question = Question.find(params[:id])
     @question.destroy
 
-    redirect_to questions_path
+    redirect_to questions_path, notice: 'Вопрос удален!'
   end
   #Показать конкретный вопрос(объект)
   def show
-    @question = Question.find(params[:id])
   end
 
   #Показать список вопросов(объектов)
   def index
+    @question = Question.new
     @questions = Question.all
   end
 
@@ -40,7 +33,15 @@ class QuestionsController < ApplicationController
   end
 
   def edit
-    @question = Question.find(params[:id])
   end
 
+  private
+
+  def question_params
+    params.require(:question).permit(:body, :user_id)
+  end
+
+  def set_question
+    @question = Question.find(params[:id])
+  end
 end
