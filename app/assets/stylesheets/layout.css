@@ -7,11 +7,27 @@ body {
 .wrapper {
   max-width: 800px;
   margin: 40px;
-  width: 100$;
+  width: 100%;
 
 }
 
 .container {
   background: #fff;
   padding: 20px;
+}
+
+.container, .navbar {
+  padding: 20px;
+}
+
+.navbar {
+  align-items: center;
+  background-color: #370617;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar a {
+  text-decoration: none;
 }
